@@ -1,0 +1,36 @@
+databases:
+  - name: courier-db
+    plan: free
+    databaseName: courier_db
+    user: courier
+
+services:
+  - type: web
+    name: courier-backend
+    runtime: docker
+    plan: free
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: courier-db
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "480"
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: CORS_ORIGINS
+        sync: false
+      - key: SEED_ON_START
+        value: "true"
+      - key: SEED_DEFAULT_PASSWORD
+        value: Password123!
