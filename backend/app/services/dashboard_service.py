@@ -62,7 +62,7 @@ class DashboardService:
             recent_orders=[OrderListItem.model_validate(order) for order in recent],
         )
 
-        if user.role in {UserRole.ADMIN, UserRole.MANAGER}:
+        if user.role == UserRole.ADMIN:
             summary.total_users = self.users.count_all()
             summary.active_users = self.users.count_active()
 

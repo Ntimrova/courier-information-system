@@ -26,7 +26,5 @@ class DashboardSummary(BaseModel):
     scope: str = Field(description="all - усі замовлення, own - лише власні")
     counters: OrderCounters
     recent_orders: list[OrderListItem]
-    total_users: int | None = Field(
-        default=None, description="Заповнюється лише для ADMIN і MANAGER"
-    )
+    total_users: int | None = Field(default=None, description="Заповнюється лише для ADMIN")
     active_users: int | None = None

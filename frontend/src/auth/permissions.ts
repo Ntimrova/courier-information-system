@@ -8,9 +8,9 @@
 
 import type { AnyOrderStatus, OrderStatus, UserRole } from '@/types/api';
 
-export const ROLES_SEEING_ALL_ORDERS: UserRole[] = ['ADMIN', 'DISPATCHER', 'MANAGER'];
+export const ROLES_SEEING_ALL_ORDERS: UserRole[] = ['ADMIN', 'DISPATCHER'];
 export const ROLES_MANAGING_USERS: UserRole[] = ['ADMIN'];
-export const ROLES_VIEWING_USERS: UserRole[] = ['ADMIN', 'MANAGER'];
+export const ROLES_VIEWING_USERS: UserRole[] = ['ADMIN'];
 export const ROLES_CREATING_ORDERS: UserRole[] = ['ADMIN', 'DISPATCHER', 'CUSTOMER'];
 export const ROLES_CHANGING_STATUS: UserRole[] = ['ADMIN', 'DISPATCHER'];
 

@@ -12,7 +12,6 @@ class UserRole(str, Enum):
     DISPATCHER = "DISPATCHER"
     COURIER = "COURIER"
     CUSTOMER = "CUSTOMER"
-    MANAGER = "MANAGER"
 
 
 class OrderStatus(str, Enum):

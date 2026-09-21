@@ -9,32 +9,12 @@ from app.core.enums import UserRole
 from app.tests.conftest import DEFAULT_PASSWORD, auth_headers, create_user
 
 
-def test_admin_can_list_users(client: TestClient, admin, customer, manager) -> None:
+def test_admin_can_list_users(client: TestClient, admin, customer, dispatcher) -> None:
     response = client.get("/api/v1/users", headers=auth_headers(client, admin.email))
     assert response.status_code == 200
     body = response.json()
     assert body["meta"]["total"] == 3
     assert len(body["items"]) == 3
-
-
-def test_manager_can_list_users_but_not_create(client: TestClient, manager) -> None:
-    headers = auth_headers(client, manager.email)
-    assert client.get("/api/v1/users", headers=headers).status_code == 200
-
-    response = client.post(
-        "/api/v1/users",
-        json={
-            "first_name": "Новий",
-            "last_name": "Користувач",
-            "email": "created.by.manager@test.ua",
-            "phone": "+380671230000",
-            "password": DEFAULT_PASSWORD,
-            "role": "CUSTOMER",
-        },
-        headers=headers,
-    )
-    assert response.status_code == 403
-    assert response.json()["error"]["code"] == "PERMISSION_DENIED"
 
 
 def test_customer_cannot_list_users(client: TestClient, customer) -> None:

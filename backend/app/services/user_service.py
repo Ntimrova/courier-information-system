@@ -18,7 +18,7 @@ from app.repositories.user_repository import UserRepository
 from app.schemas.user import UserCreate, UserProfileUpdate, UserStatusUpdate, UserUpdate
 
 #: Ролі, яким дозволено переглядати список усіх користувачів.
-USER_READ_ROLES: frozenset[UserRole] = frozenset({UserRole.ADMIN, UserRole.MANAGER})
+USER_READ_ROLES: frozenset[UserRole] = frozenset({UserRole.ADMIN})
 
 #: Ролі, яким дозволено створювати й редагувати користувачів.
 USER_WRITE_ROLES: frozenset[UserRole] = frozenset({UserRole.ADMIN})
@@ -47,7 +47,7 @@ class UserService:
         )
 
     def get_user(self, user_id: int, *, requester: User) -> User:
-        """Користувач може дивитися себе; ADMIN і MANAGER - будь-кого."""
+        """Користувач може дивитися себе; ADMIN - будь-кого."""
         if requester.id != user_id and requester.role not in USER_READ_ROLES:
             raise PermissionDeniedError("Ви можете переглядати лише власний профіль")
         user = self.users.get_by_id(user_id)

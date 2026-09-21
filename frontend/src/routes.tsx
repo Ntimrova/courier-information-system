@@ -35,17 +35,15 @@ export function AppRoutes() {
           <Route path="/profile" element={<ProfilePage />} />
 
           {/* Замовлення: кур'єру в частині 1 сюди ще зарано */}
-          <Route element={<RoleRoute allow={['ADMIN', 'DISPATCHER', 'MANAGER', 'CUSTOMER']} />}>
+          <Route element={<RoleRoute allow={['ADMIN', 'DISPATCHER', 'CUSTOMER']} />}>
             <Route path="/orders" element={<OrdersListPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
             <Route path="/orders/:id/edit" element={<OrderEditPage />} />
-          </Route>
-          <Route element={<RoleRoute allow={['ADMIN', 'DISPATCHER', 'CUSTOMER']} />}>
             <Route path="/orders/new" element={<OrderCreatePage />} />
           </Route>
 
-          {/* Користувачі: перегляд - ADMIN і MANAGER, зміни - лише ADMIN */}
-          <Route element={<RoleRoute allow={['ADMIN', 'MANAGER']} />}>
+          {/* Користувачі: перегляд і зміни - лише ADMIN */}
+          <Route element={<RoleRoute allow={['ADMIN']} />}>
             <Route path="/users" element={<UsersListPage />} />
           </Route>
           <Route element={<RoleRoute allow={['ADMIN']} />}>

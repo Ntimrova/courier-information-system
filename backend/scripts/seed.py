@@ -55,13 +55,6 @@ SEED_USERS: list[dict[str, object]] = [
         "role": UserRole.DISPATCHER,
     },
     {
-        "first_name": "Марина",
-        "last_name": "Менеджеренко",
-        "email": "manager@courier.ua",
-        "phone": "+380671000003",
-        "role": UserRole.MANAGER,
-    },
-    {
         "first_name": "Ігор",
         "last_name": "Кур'єренко",
         "email": "courier@courier.ua",

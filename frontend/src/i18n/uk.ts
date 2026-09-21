@@ -7,7 +7,6 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   DISPATCHER: 'Диспетчер',
   COURIER: "Кур'єр",
   CUSTOMER: 'Клієнт',
-  MANAGER: 'Менеджер',
 };
 
 export const STATUS_LABELS: Record<AnyOrderStatus, string> = {

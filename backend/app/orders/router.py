@@ -35,7 +35,7 @@ OrderSortDep = Annotated[
     "",
     response_model=PaginatedResponse[OrderListItem],
     summary="Список замовлень",
-    description="ADMIN, DISPATCHER і MANAGER бачать усі замовлення, CUSTOMER - лише власні. "
+    description="ADMIN і DISPATCHER бачать усі замовлення, CUSTOMER - лише власні. "
     "Пошук за tracking number, телефоном або ім'ям, фільтри за статусом, типом доставки "
     "і датою, серверна пагінація та сортування.",
 )

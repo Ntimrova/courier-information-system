@@ -75,24 +75,6 @@ def test_dispatcher_sees_all_orders(
     assert response.json()["meta"]["total"] == 2
 
 
-def test_manager_can_read_but_not_write(client: TestClient, manager, customer) -> None:
-    order = create_order_as(client, customer.email)
-    headers = auth_headers(client, manager.email)
-
-    assert client.get("/api/v1/orders", headers=headers).status_code == 200
-    assert client.get(f"/api/v1/orders/{order['id']}", headers=headers).status_code == 200
-
-    update = client.patch(
-        f"/api/v1/orders/{order['id']}", json={"comment": "Спроба зміни"}, headers=headers
-    )
-    assert update.status_code == 403
-
-    status_change = client.post(
-        f"/api/v1/orders/{order['id']}/status", json={"status": "CONFIRMED"}, headers=headers
-    )
-    assert status_change.status_code == 403
-
-
 def test_courier_has_no_orders_in_part_one(client: TestClient, courier, customer) -> None:
     order = create_order_as(client, customer.email)
     headers = auth_headers(client, courier.email)

@@ -30,10 +30,7 @@ UserSortDep = Annotated[
 ]
 
 AdminOnly = Annotated[User, Depends(require_roles(UserRole.ADMIN))]
-AdminOrManager = Annotated[User, Depends(require_roles(UserRole.ADMIN, UserRole.MANAGER))]
-StaffOnly = Annotated[
-    User, Depends(require_roles(UserRole.ADMIN, UserRole.DISPATCHER, UserRole.MANAGER))
-]
+StaffOnly = Annotated[User, Depends(require_roles(UserRole.ADMIN, UserRole.DISPATCHER))]
 
 
 @router.get(
@@ -41,12 +38,12 @@ StaffOnly = Annotated[
     response_model=PaginatedResponse[UserRead],
     summary="Список користувачів",
     description="Пошук за іменем, email або телефоном, фільтри за роллю і статусом, "
-    "серверна пагінація та сортування. Доступно ролям ADMIN і MANAGER.",
+    "серверна пагінація та сортування. Доступно ролі ADMIN.",
     responses={403: {"model": ErrorResponse}},
 )
 def list_users(
     session: DbSession,
-    _: AdminOrManager,
+    _: AdminOnly,
     page_params: PageParamsDep,
     sort: UserSortDep,
     search: Annotated[
@@ -107,7 +104,7 @@ def update_own_profile(
     response_model=list[UserShort],
     summary="Активні клієнти для вибору у формі замовлення",
     description="Потрібно диспетчеру й адміністратору, щоб оформити замовлення "
-    "від імені клієнта. Доступно ролям ADMIN, DISPATCHER, MANAGER.",
+    "від імені клієнта. Доступно ролям ADMIN, DISPATCHER.",
     responses={403: {"model": ErrorResponse}},
 )
 def list_customer_options(

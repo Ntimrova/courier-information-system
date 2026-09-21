@@ -1,6 +1,6 @@
 /** Типи, що дзеркалять схеми backend. */
 
-export const USER_ROLES = ['ADMIN', 'DISPATCHER', 'COURIER', 'CUSTOMER', 'MANAGER'] as const;
+export const USER_ROLES = ['ADMIN', 'DISPATCHER', 'COURIER', 'CUSTOMER'] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
 /** Статуси, доступні в першій частині системи. */

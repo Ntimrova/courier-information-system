@@ -150,18 +150,6 @@ def dispatcher(db_session: Session) -> User:
 
 
 @pytest.fixture()
-def manager(db_session: Session) -> User:
-    return create_user(
-        db_session,
-        email="manager@test.ua",
-        role=UserRole.MANAGER,
-        first_name="Марина",
-        last_name="Менеджеренко",
-        phone="+380670000003",
-    )
-
-
-@pytest.fixture()
 def courier(db_session: Session) -> User:
     return create_user(
         db_session,

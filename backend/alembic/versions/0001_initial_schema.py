@@ -26,7 +26,6 @@ user_role = postgresql.ENUM(
     "DISPATCHER",
     "COURIER",
     "CUSTOMER",
-    "MANAGER",
     name="user_role",
 )
 package_size = postgresql.ENUM("SMALL", "MEDIUM", "LARGE", name="package_size")

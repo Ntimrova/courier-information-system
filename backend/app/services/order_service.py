@@ -30,9 +30,7 @@ from app.services import status_rules
 from app.services.tracking import generate_tracking_number
 
 #: Ролі, що бачать усі замовлення.
-ORDER_READ_ALL_ROLES: frozenset[UserRole] = frozenset(
-    {UserRole.ADMIN, UserRole.DISPATCHER, UserRole.MANAGER}
-)
+ORDER_READ_ALL_ROLES: frozenset[UserRole] = frozenset({UserRole.ADMIN, UserRole.DISPATCHER})
 
 #: Ролі, що можуть створювати й редагувати замовлення.
 ORDER_WRITE_ROLES: frozenset[UserRole] = frozenset(
@@ -85,8 +83,6 @@ class OrderService:
         """Перевіряє право редагувати або скасовувати конкретне замовлення."""
         if user.role in {UserRole.ADMIN, UserRole.DISPATCHER}:
             return
-        if user.role == UserRole.MANAGER:
-            raise PermissionDeniedError("Менеджер має доступ лише для перегляду")
         if user.role != UserRole.CUSTOMER or order.customer_id != user.id:
             raise PermissionDeniedError("Ви можете змінювати лише власні замовлення")
         if order.status not in CUSTOMER_EDITABLE_STATUSES:
